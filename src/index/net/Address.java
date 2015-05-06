@@ -1,9 +1,12 @@
 package index.net;
 
+import index.Var.Final;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class Address {
+	static final Address SERVER = new Address(Final.SERVER_IP, Final.SERVER_PORT);
 	InetAddress i;
 	int port;
 	Address(String ip, int port){

@@ -7,8 +7,8 @@ import java.util.Date;
 
 @SuppressWarnings("serial")
 public class Information implements Serializable {
-	static Date d = new Date();
-	static DateFormat sdf = new SimpleDateFormat("[HH:mm:ss]"); 
+	transient static Date d = new Date();
+	transient static DateFormat sdf = new SimpleDateFormat("[HH:mm:ss]"); 
 	String time, str;
 	Information(String str){
 		this.str = str;

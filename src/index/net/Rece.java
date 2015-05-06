@@ -1,6 +1,7 @@
 package index.net;
 
 import index.Backstage.Print;
+import index.Var.Final;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -10,8 +11,10 @@ import java.net.DatagramSocket;
 import java.net.SocketException;
 
 public class Rece extends Thread {
-	static String hostName = "192.168.1.4";
-	static int port = 56655;
+	private static int port = 56655;
+	public static int getPort(){
+		return port;
+	}
 	static DatagramSocket ds;
 	private static DatagramSocket getDatagramSocket(int port){
 		try {
@@ -30,25 +33,26 @@ public class Rece extends Thread {
 	}
 	public void run() {
 		while(true){
-			byte[] buf = new byte[1024];
+			byte[] buf = new byte[65536];
 			DatagramPacket dp = new DatagramPacket(buf, buf.length);
 			try {
 				ds.receive(dp);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			if(dp.getAddress().getHostName().equals(hostName)){
+			if(dp.getAddress().getHostName().equals(Final.SERVER_IP)){
 				ByteArrayInputStream bais = new ByteArrayInputStream(dp.getData());
 		        ObjectInputStream ois = null;
 		        try {
 					ois = new ObjectInputStream(bais);
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 		        Information i = null;
 		        try {
-					i = (Information) ois.readObject();
-				} catch (ClassNotFoundException | IOException e) {
+		        	Object obj = ois.readObject();
+		        	if(obj instanceof Information)i = (Information) obj;
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 		        if(i != null){

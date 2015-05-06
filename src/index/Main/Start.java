@@ -15,7 +15,7 @@ public class Start {
 	    		if(args[0].equals("-gui") || args[0].equals("-GUI"))initClass("index.GUI.FramePrintStream");
 	    	}
 			Print.standard("Start INDEX !", "index.Main.Start$Do", Print.INFO);
-			initClass("index.Main.Start$ClassName");
+			initClass("index.Main.Start$GUIClass");
 	    	Print.standard("Time consuming: " + ((System.currentTimeMillis() - startTime) / 1000.0) + "s", "index.Main.Start.main", Print.INFO);
 	    	Print.standard("The main thread is over !", "index.Main.Start$Do", Print.INFO);
 		}
@@ -31,14 +31,14 @@ public class Start {
 			Print.standard("The class: " + className + "is not find !", "index.Main.Start.initClass", Print.ERROR);
 		}
     }
-    public enum ClassName {
+    public enum GUIClass {
 		Resources("index.GUI.Resources"), GUI("index.GUI.GUI");
         private String name;
-        private ClassName(String name){
+        private GUIClass(String name){
             this.name = name;
         }
         static {
-        	for (ClassName c : ClassName.values()){
+        	for (GUIClass c : GUIClass.values()){
             	initClass(c.name);
             }
         }

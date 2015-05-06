@@ -1,5 +1,7 @@
 package index.net;
 
+import index.Main.Start;
+
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
@@ -8,7 +10,7 @@ import java.net.SocketException;
 
 public class Send {
 	static DatagramSocket ds;
-	public static void seed(Object obj, Address a){
+	public static <T extends Object> void seed(T obj, Address a){
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos = null;
         try{
@@ -27,6 +29,8 @@ public class Send {
 	static {
 		try {
 			ds = new DatagramSocket();
+			Start.initClass("index.net.Rece");
+			seed(new ConnectionRequest(Rece.getPort()), Address.SERVER);
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}

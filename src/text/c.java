@@ -1,7 +1,5 @@
 package text;
 
-import java.math.BigInteger;
-
 public class c {
 	public static void main(String[] a){
 		System.out.println("本机完成计算大约需要:" + Math.pow(2,303) / (3600 * 24 * 365) + "年");
