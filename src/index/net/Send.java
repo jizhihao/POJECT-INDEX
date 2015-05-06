@@ -1,6 +1,6 @@
 package index.net;
 
-import index.Main.Start;
+import index.main.Start;
 
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;

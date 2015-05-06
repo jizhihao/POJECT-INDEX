@@ -1,7 +1,7 @@
 package index.GUI;
 
-import index.Backstage.Print;
-import index.Backstage.ThreadNumber;
+import index.backstage.Print;
+import index.backstage.ThreadNumber;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -70,7 +70,7 @@ public final class FramePrintStream extends JFrame {
             is.close();
             bis.close();
         } catch (FontFormatException | IOException e) {
-        	Print.standard("Resource files are missing: Inconsolata.otf", "GUI.FramePrintStream.getInconsolata", Print.ERROR);
+        	Print.standard("Resource files are missing: Inconsolata.otf", "index.GUI.FramePrintStream.getInconsolata", Print.ERROR);
         }
         return Inconsolata;
     }
@@ -79,7 +79,7 @@ public final class FramePrintStream extends JFrame {
     }
     static {
     	fps.setVisible(true);
-    	Print.standard("Success link background !", "GUI.FramePrintStream", Print.INFO);
+    	Print.standard("Success link background !", "index.GUI.FramePrintStream", Print.INFO);
     	try {
 			Class.forName("index.Backstage.ThreadNumber");
 		} catch (ClassNotFoundException e) {

@@ -1,6 +1,6 @@
 package index.net;
 
-import index.Var.Final;
+import index.var.Final;
 
 @SuppressWarnings("serial")
 public class ConnectionRequest extends Information{

@@ -1,6 +1,6 @@
 package index.net;
 
-import index.Var.Final;
+import index.var.Final;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

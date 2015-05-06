@@ -8,8 +8,8 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-import index.Backstage.Print;
-import index.Backstage.ThreadNumber;
+import index.backstage.Print;
+import index.backstage.ThreadNumber;
 
 public final class GUI implements Runnable {
 	private interface Draw{
@@ -42,7 +42,7 @@ public final class GUI implements Runnable {
     private static BufferStrategy bufferStrategy;
     static boolean framePrintStreamRunning;
 	private GUI(){
-		Print.standard("Now doing launchFrame ... ", "GUI.GUI.launchFrame", Print.INFO);
+		Print.standard("Now doing launchFrame ... ", "index.GUI.GUI.launchFrame", Print.INFO);
         frame = new JFrame("POJECT - INDEX");
         frame.setIconImage(Resources.icon);
         frame.setUndecorated(true);
@@ -61,7 +61,7 @@ public final class GUI implements Runnable {
         canvas.createBufferStrategy(2);
         bufferStrategy = canvas.getBufferStrategy();
         Box.userID.requestFocus();
-        Print.standard("Complete launchFrame !", "GUI.GUI.launchFrame", Print.INFO);
+        Print.standard("Complete launchFrame !", "index.GUI.GUI.launchFrame", Print.INFO);
 	}
 	private static long desiredFPS = 0;  
 	private static long desiredDeltaLoop = 0;
@@ -97,13 +97,13 @@ public final class GUI implements Runnable {
     	desiredFPS = l;
     	desiredDeltaLoop = (1000*1000*1000) / desiredFPS;
     	if(ThreadNumber.running)FramePrintStream.getFps().setTitle("The execute permissions: Chief Executive Officer - Mickey   FPS: " + desiredFPS + "   Thread: " + ThreadNumber.map.size());
-    	Print.standard("Now doing setFPS " + (int) l + " ... ", "GUI.GUI.setFPS", Print.INFO);
+    	Print.standard("Now doing setFPS " + (int) l + " ... ", "index.GUI.GUI.setFPS", Print.INFO);
     }
     public static final long getFPS(){
 		return desiredFPS;
     }
     static {
-    	Print.standard("Now doing load ... ", "GUI.GUI", Print.INFO);
+    	Print.standard("Now doing load ... ", "index.GUI.GUI", Print.INFO);
     	draw = getLoginDraw();
     	gf = new GUI();
 		t = new Thread(gf);

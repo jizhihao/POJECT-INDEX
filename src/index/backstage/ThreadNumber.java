@@ -1,4 +1,4 @@
-package index.Backstage;
+package index.backstage;
 
 import index.GUI.FramePrintStream;
 import index.GUI.GUI;

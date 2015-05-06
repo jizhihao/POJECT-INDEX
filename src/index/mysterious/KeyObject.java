@@ -1,4 +1,4 @@
-package index.Mysterious;
+package index.mysterious;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;

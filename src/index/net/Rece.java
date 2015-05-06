@@ -1,7 +1,7 @@
 package index.net;
 
-import index.Backstage.Print;
-import index.Var.Final;
+import index.backstage.Print;
+import index.var.Final;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -24,12 +24,12 @@ public class Rece extends Thread {
 		}
 	}
 	static {
-		Print.standard("Now doing load ... ", "net.Rece", Print.INFO);
+		Print.standard("Now doing load ... ", "index.net.Rece", Print.INFO);
 		while(ds == null){
 			ds = getDatagramSocket(++port);
 		}
 		new Rece().start();
-		Print.standard("Rece binding to: " + port, "net.Rece", Print.INFO);
+		Print.standard("Rece binding to: " + port, "index.net.Rece", Print.INFO);
 	}
 	public void run() {
 		while(true){
