@@ -1,15 +1,10 @@
 package index.net;
 
+import index.main.Start;
+
 public class Main {
 	public static void main(String[] args) {
-		try {
-			Class.forName("index.net.Rece");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		Address a = new Address("192.168.1.4", 56656);
-		Information i = new Information("i love you");
-			Send.seed(i, a);
-		System.out.println("");
+		Start.initClass("index.Server.Rece");
+		IndexSocket.send(new Information("i love you"));
 	}
 }

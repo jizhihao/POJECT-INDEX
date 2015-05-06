@@ -141,7 +141,7 @@ public final class Resources {
 		        	g.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_ATOP, f));
 				    head = temp;
 				    try {
-				    	Thread.sleep(1000 / GUI.getFPS());
+				    	Thread.sleep(1000 / GUIframe.getFPS());
 				    } catch (InterruptedException e) {
 				    	e.printStackTrace();
 				    }

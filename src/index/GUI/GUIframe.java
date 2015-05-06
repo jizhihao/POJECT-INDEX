@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import index.backstage.Print;
 import index.backstage.ThreadNumber;
 
-public final class GUI implements Runnable {
+public final class GUIframe implements Runnable {
 	private interface Draw{
 		public abstract void render(Graphics2D g, JFrame frame);
 		public abstract void update(int deltaTime);
@@ -34,14 +34,14 @@ public final class GUI implements Runnable {
 	}
 	private static Graphics2D g;
 	private static Draw draw;
-	private static GUI gf;
+	private static GUIframe gf;
 	private static Thread t;
 	private static JFrame frame;
     private static Canvas canvas; 
     private static JComponent jc;
     private static BufferStrategy bufferStrategy;
     static boolean framePrintStreamRunning;
-	private GUI(){
+	private GUIframe(){
 		Print.standard("Now doing launchFrame ... ", "index.GUI.GUI.launchFrame", Print.INFO);
         frame = new JFrame("POJECT - INDEX");
         frame.setIconImage(Resources.icon);
@@ -105,7 +105,7 @@ public final class GUI implements Runnable {
     static {
     	Print.standard("Now doing load ... ", "index.GUI.GUI", Print.INFO);
     	draw = getLoginDraw();
-    	gf = new GUI();
+    	gf = new GUIframe();
 		t = new Thread(gf);
 		t.start();
 		setFPS(60);
