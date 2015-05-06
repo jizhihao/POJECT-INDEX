@@ -8,7 +8,7 @@ public class Main {
 			e.printStackTrace();
 		}
 		Address a = new Address("192.168.1.4", 56656);
-		Information i = new Information("i love u");
+		Information i = new Information("i love you");
 			Send.seed(i, a);
 		System.out.println("");
 	}
