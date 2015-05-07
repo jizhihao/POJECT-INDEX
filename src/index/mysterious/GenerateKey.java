@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public final class GenerateKey {
-	private final static String generateKey(String strkey){
+	public final static String generateKey(String strkey){
 		int[] a = null;
 		int[] b = null;
 		int[] c = null;
@@ -124,7 +124,4 @@ public final class GenerateKey {
         }
         return result;
     }
-	public static void main(String[] a){
-		System.out.println(generateKey("zxcsw123xz"));
-	}
 }

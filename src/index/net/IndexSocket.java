@@ -37,7 +37,7 @@ public class IndexSocket {
 			s = new Socket(Final.SERVER_IP, Final.SERVER_PORT);
 			new Thread(new Rece()).start();
 			out = s.getOutputStream();
-			send(new Information(Final.VERSION));
+			send(new VersionInformation(Final.VERSION));
 		} catch (Exception e) {
 			Print.standard("Failed to create the socket object.", "index.net.Send", Print.ERROR);
 		}
@@ -66,16 +66,18 @@ public class IndexSocket {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-			        Information i = null;
 			        try {
 			        	Object obj = ois.readObject();
-			        	if(obj instanceof Information)i = (Information) obj;
+			        	if(obj instanceof VersionInformation){
+			        		VersionInformation i = (VersionInformation) obj;
+			        		if(i != null){
+					        	System.out.println(i.version + "  此消息撰写时间为:" + i.time);
+					        	continue;
+					        }
+			        	}
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-			        if(i != null){
-			        	System.out.println(i.str + "  此消息撰写时间为:" + i.time);
-			        }
 				}
 			}
 		}
