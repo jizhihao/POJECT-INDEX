@@ -9,12 +9,14 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 
 public class IndexSocket {
+	static Thread t;
 	static Socket s;
 	static OutputStream out;
-	public static <T extends Object> void send(T obj){
+	public static final <T extends Information & Serializable> void send(T obj){
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos = null;
         try{
@@ -28,56 +30,62 @@ public class IndexSocket {
            if(baos != null)baos.close();
            if(oos != null)oos.close();
         }catch(Exception e){
-        	e.printStackTrace();
+        	Print.standard("Failed to send the object.", "index.net.IndexSocket.send", Print.ERROR);
         }
 	}
 	static {
-		Print.standard("Now doing load ... ", "index.net.Send", Print.INFO);
+		Print.standard("Now doing load ... ", "index.net.IndexSocket", Print.INFO);
 		try {
+			(t = new Thread(new Rece())).start();
 			s = new Socket(Final.SERVER_IP, Final.SERVER_PORT);
-			new Thread(new Rece()).start();
+			Print.standard("Successfully established a connection with the server !", "index.net.IndexSocket", Print.INFO);
 			out = s.getOutputStream();
+			Print.standard("Successfully obtain output stream !", "index.net.IndexSocket", Print.INFO);
+			//send(new LoginInformation("Mickey", GenerateKey.generateKey("!!z961216@@")));
 			send(new VersionInformation(Final.VERSION));
-		} catch (Exception e) {
-			Print.standard("Failed to create the socket object.", "index.net.Send", Print.ERROR);
+		} catch(Exception e){
+			Print.standard("Failed to create the socket object.", "index.net.IndexSocket", Print.ERROR);
 		}
 	}
 	static class Rece implements Runnable {
-		public void run() {
+		public void run(){
 			int len = 0;
 			InputStream in = null;
 			try {
 				in = s.getInputStream();
-			} catch (Exception e) {
-				Print.standard("Failed to gets the input stream.", "index.Server.Rece.run", Print.ERROR);
+				Print.standard("Successfully obtain input stream !", "index.net.IndexSocket", Print.INFO);
+			} catch(Exception e){
+				Print.standard("Failed to gets the input stream.", "index.net.IndexSocket$Rece.run", Print.ERROR);
 			}
 			while(true){
 				if(s.getInetAddress().getHostName().equals(Final.SERVER_IP)){
 					byte[] buf = new byte[1024];
 					try {
 						len = in.read(buf);
-					} catch (Exception e) {
-						Print.standard("Failed to read the input stream.", "index.Server.Rece.run", Print.ERROR);
+					} catch(Exception e){
+						Print.standard("Failed to read the input stream.", "index.net.IndexSocket$Rece.run", Print.ERROR);
 					}
-					ByteArrayInputStream bais = new ByteArrayInputStream(buf, 0 , len);
+					ByteArrayInputStream bais = new ByteArrayInputStream(buf, 0, len);
 			        ObjectInputStream ois = null;
 			        try {
 						ois = new ObjectInputStream(bais);
-					} catch (Exception e) {
-						e.printStackTrace();
+					} catch(Exception e){
+						Print.standard("Failed to converts a byte stream object.", "index.net.IndexSocket$Rece.run", Print.ERROR);
 					}
 			        try {
 			        	Object obj = ois.readObject();
 			        	if(obj instanceof VersionInformation){
 			        		VersionInformation i = (VersionInformation) obj;
 			        		if(i != null){
-					        	System.out.println(i.version + "  此消息撰写时间为:" + i.time);
+			        			VersionInformation.checkVersion(i);
 					        	continue;
 					        }
 			        	}
-					} catch (Exception e) {
-						e.printStackTrace();
+					} catch(Exception e){
+						Print.standard("Failed to convert object.", "index.net.IndexSocket$Rece.run", Print.ERROR);
 					}
+				} else{
+					Print.standard("Receive an unknown data from " + s.getInetAddress().getHostName() + " packets.", "index.net.IndexSocket$Rece.run", Print.ERROR);
 				}
 			}
 		}

@@ -3,14 +3,11 @@ package index.GUI;
 import index.backstage.Print;
 
 import java.awt.AlphaComposite;
-import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
@@ -24,7 +21,7 @@ public final class Resources {
 				this.y = (int) (y * scaleH);
 				this.w = (int) (i.getWidth(null) * scaleW);
 				this.h = (int) (i.getHeight(null) * scaleH);
-			}catch(NullPointerException e){
+			}catch(Exception e){
 				Print.standard("NullPointerException !", "index.GUI.Resources.ImageContent", Print.ERROR);
 			}
 		}
@@ -36,7 +33,6 @@ public final class Resources {
 	static String name;
 	static Font wawaFont;
 	static double scaleW, scaleH;
-	static Cursor pointer;
 	static Image i, iBuffer, head, icon, cloud, landingBox, stroke, point;
 	static ImageContent cloudC, landingBoxC, strokeC, pointC;
 	static ImageContent quitC, nextC;
@@ -65,7 +61,7 @@ public final class Resources {
 	private static final Image getImage(String fileName){
 		try {
 			return ImageIO.read(Resources.class.getResource("/resources/" + fileName));
-		} catch(IOException | IllegalArgumentException e) {
+		} catch(Exception e){
 			Print.standard("Resource files are missing: "+fileName, "index.GUI.Resources.getImage", Print.ERROR);
 			return null;
 		}
@@ -96,7 +92,7 @@ public final class Resources {
             wawaFont = Font.createFont(Font.TRUETYPE_FONT, bis).deriveFont(24.0f);
             is.close();
             bis.close();
-        } catch (FontFormatException | IOException e) {
+        } catch(Exception e){
         	Print.standard("Resource files are missing: wawa.ttf", "index.GUI.Resources.getFont", Print.ERROR);
         }
         Print.standard("Complete getFont !", "index.GUI.Resources.getFont", Print.INFO);
@@ -104,7 +100,7 @@ public final class Resources {
 	private static final Image getHead(String fileName){
 		try {
 			return ImageIO.read(Resources.class.getResource("/resources/" + fileName));
-		} catch(IOException | IllegalArgumentException e) {
+		} catch(Exception e){
 			Print.standard("Resource files are missing: "+fileName, "index.GUI.Resources.getImage", Print.ERROR);
 			return null;
 		}
@@ -142,7 +138,7 @@ public final class Resources {
 				    head = temp;
 				    try {
 				    	Thread.sleep(1000 / GUIframe.getFPS());
-				    } catch (InterruptedException e) {
+				    } catch(Exception e) {
 				    	e.printStackTrace();
 				    }
 			    }

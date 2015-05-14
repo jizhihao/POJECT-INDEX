@@ -11,7 +11,7 @@ public abstract class Animation extends Thread{
 	public final int getAnimation(){
 		try {
 			sleep(1000 / frames);
-		} catch (InterruptedException e) {
+		} catch(InterruptedException e) {
 			e.printStackTrace();
 		}
 		currentframes++;

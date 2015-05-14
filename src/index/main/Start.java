@@ -27,8 +27,8 @@ public class Start {
     public static void initClass(String className){
     	try {
 			Class.forName(className);
-		} catch (ClassNotFoundException e) {
-			Print.standard("The class: " + className + "is not find !", "index.main.Start.initClass", Print.ERROR);
+		} catch(Throwable e){
+			Print.standard("The class: " + className + " is not find !", "index.main.Start.initClass", Print.GROSS_ERROR);
 		}
     }
     public enum GUIClass {
@@ -38,7 +38,7 @@ public class Start {
             this.name = name;
         }
         static {
-        	for (GUIClass c : GUIClass.values()){
+        	for(GUIClass c : GUIClass.values()){
             	initClass(c.name);
             }
         }

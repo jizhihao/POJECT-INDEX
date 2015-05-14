@@ -77,13 +77,13 @@ public final class GUIframe implements Runnable {
             render(); 
             lastUpdateTime = currentUpdateTime;
             currentUpdateTime = System.nanoTime();
-            draw.update((int) ((currentUpdateTime - lastUpdateTime)/(1000*1000)));
+            draw.update((int) ((currentUpdateTime - lastUpdateTime) / (1000*1000)));
             endLoopTime = System.nanoTime();
             deltaLoop = endLoopTime - beginLoopTime;
         	if(desiredDeltaLoop > deltaLoop)
-                try{
-                    Thread.sleep((desiredDeltaLoop - deltaLoop)/(1000*1000));
-                }catch(InterruptedException e){}
+                try {
+                    Thread.sleep((desiredDeltaLoop - deltaLoop) / (1000*1000));
+                } catch(InterruptedException e){}
     		}
     }
     private final void render(){ 
@@ -96,7 +96,7 @@ public final class GUIframe implements Runnable {
     public static final void setFPS(long l){
     	desiredFPS = l;
     	desiredDeltaLoop = (1000*1000*1000) / desiredFPS;
-    	if(ThreadNumber.running)FramePrintStream.getFps().setTitle("The execute permissions: Chief Executive Officer - Mickey   FPS: " + desiredFPS + "   Thread: " + ThreadNumber.map.size());
+    	if(ThreadNumber.running)FramePrintStream.getFps().setTitle("The execute permissions: Chief Executive Officer - Mickey   FPS: " + desiredFPS + "   Thread: " + Thread.getAllStackTraces().size());
     	Print.standard("Now doing setFPS " + (int) l + " ... ", "index.GUI.GUI.setFPS", Print.INFO);
     }
     public static final long getFPS(){
